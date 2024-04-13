@@ -1,1 +1,1 @@
-# custom
+# Custom Stock Analyzer
