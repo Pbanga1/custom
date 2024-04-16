@@ -1,9 +1,10 @@
 import pandas as pd
 import os
+import requests
 from dotenv import load_dotenv
 import alpaca_trade_api as tradeapi
     
-def get_data(tickers, start_dt, end_dt):
+def ticker_data(tickers, start_dt, end_dt):
     load_dotenv()
 
     alpaca_key = os.getenv("ALPACA_API_KEY")
@@ -27,3 +28,7 @@ def get_data(tickers, start_dt, end_dt):
     ).df
 
     return df_portfolio
+
+# Reorganizing the data
+
+# def reorganize_data(tickers, )
