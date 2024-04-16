@@ -8,9 +8,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
 
 # Download stock data
-stock_data = yf.download('AAPL', start='2010-01-01', end='2024-04-16')
+stock_data = yf.download('AAPL', start='2019-01-01', end='2024-04-16')
 
 # Analyze stock data
 st.subheader('Stock Data')
@@ -28,19 +29,23 @@ model = Prophet()
 model.fit(df)
 
 # Make future predictions
-future = model.make_future_dataframe(periods=365)
+future = model.make_future_dataframe(periods=1000)
 forecast = model.predict(future)
 
 # Plot Prophet results
 fig = model.plot(forecast)
 st.pyplot(fig)
 
+fig1 = model.plot_components(forecast)
+
+st.pyplot(fig1)
+
 # Calculate daily returns
 returns = stock_data.Close.pct_change()
 
 # Analyze daily returns
 st.subheader('Daily Returns')
-st.write(returns.head(50))
+st.write(returns)
 
 # Clean and prepare data for machine learning
 X = returns.values
